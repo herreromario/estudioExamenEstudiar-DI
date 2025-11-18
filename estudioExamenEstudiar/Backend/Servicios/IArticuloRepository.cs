@@ -8,5 +8,6 @@ namespace estudioExamenEstudiar.Backend.Servicios
     /// </summary>
     public interface IArticuloRepository : IGenericRepository<Articulo>
     {
+        Task AddArticulosAsync(Articulo articulo);
     }
 }

@@ -9,5 +9,6 @@ namespace estudioExamenEstudiar.Backend.Servicios
 {
     public interface IModeloArticuloRepository : IGenericRepository<Modeloarticulo>
     {
+        Task<bool> ExistsByNameAsync(string nombre, CancellationToken cancellationToken = default);
     }
 }

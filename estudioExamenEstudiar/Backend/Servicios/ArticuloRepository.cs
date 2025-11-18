@@ -9,9 +9,27 @@ namespace estudioExamenEstudiar.Backend.Servicios
     /// </summary>
     public class ArticuloRepository : GenericRepository<Articulo>, IArticuloRepository
     {
-        public ArticuloRepository(DiinventarioexamenContext context, ILogger<GenericRepository<Articulo>> logger)
+        private readonly DiinventarioexamenContext _context;
+
+        public ArticuloRepository(
+            DiinventarioexamenContext context,
+            ILogger<GenericRepository<Articulo>> logger)
             : base(context, logger)
         {
+            _context = context;
+        }
+
+        public async Task AddArticulosAsync(Articulo articulo)
+        {
+            try
+            {
+                await _context.Articulos.AddAsync(articulo);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al añadir artículo: " + ex.Message);
+            }
         }
     }
 }
