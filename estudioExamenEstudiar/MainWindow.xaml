@@ -138,10 +138,12 @@
                         Background="{x:Null}"
                         Foreground="White">
                         <ListView
+                            x:Name="Articulos"
+                            SelectionChanged="RouteButton"
                             Foreground="White"
                             Style="{StaticResource MaterialDesignListView}"
                             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                            <ListViewItem Content="Articulos" Padding="20 5" />
+                            <ListViewItem Content="Articulo" Padding="20 5" />
                             <ListViewItem Content="Modelo Articulo" Padding="20 5" />
                             <ListViewItem Content="Tipo de Articulos" Padding="20 5" />
                         </ListView>
@@ -236,9 +238,9 @@
             </StackPanel>
         </Grid>
 
-        <!-- Contenido principal -->
-        <Grid Background="White">
-            <!-- UI principal aquí -->
+        <!-- UserControl -->
+        <Grid Background="White" x:Name="MainContent">
+            <!-- Contenido UserControl -->
         </Grid>
 
     </DockPanel>

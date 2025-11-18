@@ -20,85 +20,62 @@ namespace estudioExamenEstudiar.Frontend.Dialogos
 {
     public partial class GestionModeloArticulo : MetroWindow
     {
+        private DiinventarioexamenContext _context; // SIEMPRE NECESARIO, RECOGE TODAS LAS TABLAS
+        private ModeloArticuloRepository _modeloArticuloRepository; // NECESARIO YA QUE VAMOS A TOCAR EL MODELO DE ARTICULO
+        private TipoArticuloRepository _tipoArticuloRepository; // NECESARIO PORQUE VAMOS A USAR EL TIPO DE ARTICULO
+
         public GestionModeloArticulo()
         {
             InitializeComponent();
         }
 
-        private void BtnCancelar_Click(object sender, RoutedEventArgs e)
+        private async void diagModeloArticulo_Loaded(object sender, RoutedEventArgs e) // CUANDO SE ABRE EL DIALOGO, HACE LO SIGUIENTE:
         {
-            this.Close();
+            _context = new DiinventarioexamenContext();// INSTANCIA TODAS LAS TABLAS
+            _modeloArticuloRepository = new ModeloArticuloRepository(_context, null); // INSTANCIA EL MODELO, PIDE EL CONTEXTO (PARA VER LA TABLA) Y UN NULO
+            _tipoArticuloRepository = new TipoArticuloRepository(_context, null); // INSTANCIA EL TIPO ARTICULO, PIDE EL CONTEXTO (PARA VER LA TABLA) Y UN NULO
+                                                                                  //se modificará mas adelante
+
+            List<Tipoarticulo> tipos = await _tipoArticuloRepository.GetAllAsync(); // CARGAMOS LOS TIPOS DE ARTICULO EN UNA LISTA QUE ESTARA EN EL COMBOBOX
+            cmbTipoArticulo.ItemsSource = tipos; // CARGAMOS LA LISTA DE TIPOS EN EL COMBO BOX
         }
 
-        private async void BtnGuardar_Click(Object sender, RoutedEventArgs e)
+
+
+        private void RecogeDatos(Modeloarticulo modeloarticulo) // RECOGE LOS DATOS INSERTADOS EN EL DIALOGO
         {
-            string nombre = txtNombre.Text.Trim();
-            string marca = txtMarca.Text.Trim();
-            string modelo = txtModelo.Text.Trim();
-            string tipoTexto = txtTipo.Text.Trim();
-            string descripcion = txtDescripcion.Text.Trim();
-
-            // Validaciones
-            if (string.IsNullOrEmpty(nombre) ||
-                string.IsNullOrEmpty(marca) ||
-                string.IsNullOrEmpty(modelo) ||
-                string.IsNullOrEmpty(tipoTexto))
+            modeloarticulo.Nombre = txtNombre.Text; // RECOGE EL DATO DE NOMBRE
+            modeloarticulo.Descripcion = txtDescripcion.Text; // RECOGE EL DATO DE DESCRIPCION
+            modeloarticulo.Marca = txtMarca.Text; // RECOGE EL DATO DE MARCA
+            modeloarticulo.Modelo = txtModelo.Text; // RECOGE EL DATO DE MODELO
+            if (cmbTipoArticulo.SelectedItem != null)
             {
-                MessageBox.Show("Los campos Nombre, Marca y Tipo son obligatorios.",
-                                "Aviso", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-
+                modeloarticulo.TipoNavigation = (Tipoarticulo)cmbTipoArticulo.SelectedItem; // RECOGE EL DATO SELECCIONADO DEL COMBOBOX | EN  LOS CMB SIEMPRE SE USA LOS NAVIGATION (TABLAS RELACIONALES)
             }
 
-            if (!int.TryParse(tipoTexto, out int tipoId))
-            {
-                MessageBox.Show("El campo Tipo debe ser un número válido.",
-                                "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+        }
 
-            }
-
+        //Botones por activar
+        private async void btnAnyadirModeloArticulo_Click(object sender, RoutedEventArgs e) // AÑADE UN MODELO DE ARTICULO
+        {
+            Modeloarticulo modeloarticulo = new Modeloarticulo(); // CREA EL NUEVO MODELO
+            RecogeDatos(modeloarticulo); // RELLENA  EL  NUEVO MODELO CON LOS DATOS RECOGIDOS
             try
             {
-                using var context = new DiinventarioexamenContext();
-
-                var repo = new ModeloArticuloRepository(
-                    context,
-                    new LoggerFactory().CreateLogger<GenericRepository<Modeloarticulo>>());
-
-                // ¿Existe ya un modelo con ese nombre?
-
-                if (await repo.ExistsByNameAsync(nombre))
-                {
-                    MessageBox.Show("Ya existe un modelo con ese nombre.",
-                                    "Aviso", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
-                }
-
-                // Crear el modelo
-                var nuevoModelo = new Modeloarticulo
-                {
-                    Nombre = nombre,
-                    Marca = marca,
-                    Modelo = modelo,
-                    Tipo = tipoId,
-                    Descripcion = descripcion
-                };
-
-                // Guardar en la BD
-                await repo.AddAsync(nuevoModelo);
-
-                MessageBox.Show("Modelo guardado correctamente.",
-                                "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                this.Close();
+                await _modeloArticuloRepository.AddAsync(modeloarticulo); // AÑADE EL MODELO DE  ARTICULO NUEVO
+                _context.SaveChanges(); // GUARDA LOS CAMBIOS
             }
-
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al guardar el modelo: {ex.Message}",
-                                "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Error al guardar " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+
+
+        private void btnCancelarModeloArticulo_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false; // CIERRA EL DIALOGO
         }
     }
 }

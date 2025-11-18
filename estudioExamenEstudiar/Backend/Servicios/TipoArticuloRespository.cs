@@ -8,10 +8,12 @@ using System.Threading.Tasks;
 
 namespace estudioExamenEstudiar.Backend.Servicios
 {
-    public class TipoArticuloRespository : GenericRepository<Tipoarticulo>, ITipoArticuloRespository
+    public class TipoArticuloRepository : GenericRepository<Tipoarticulo>, ITipoArticuloRepository
     {
-        public TipoArticuloRespository(DiinventarioexamenContext context, ILogger<GenericRepository<Tipoarticulo>> logger) : base(context, logger)
+        public TipoArticuloRepository(DiinventarioexamenContext context, ILogger<GenericRepository<Tipoarticulo>> logger)
+            : base(context, logger)
         {
+
         }
     }
 }

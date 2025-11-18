@@ -7,9 +7,10 @@
         xmlns:materialDesignIcons="http://materialdesigninxaml.net/winfx/xaml/shared"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:estudioExamenEstudiar.Frontend.Dialogos"
+        Loaded="diagModeloArticulo_Loaded"
         mc:Ignorable="d"
         
-        Title="GestionModeloArticulo" 
+        Title="NuevoModeloArticulo" 
         
         Height="450" 
         Width="800">
@@ -32,14 +33,14 @@
 
         <!-- HEADER -->
         <Grid Grid.Row="0" Background="#dd243c" Grid.ColumnSpan="2"/>
-        <TextBlock Text="GESTIÓN MODELO ARTÍCULO"
+        <TextBlock Text="NUEVO MODELO ARTÍCULO"
                    FontSize="30"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    FontWeight="Bold"
                    Foreground="White"
                    Grid.ColumnSpan="2"
-                   Grid.Row="0" />
+                   Grid.Row="0"/>
 
         <!-- NOMBRE -->
         <TextBox x:Name="txtNombre"
@@ -50,7 +51,8 @@
                  HorizontalAlignment="Left"
                  Margin="20,45,0,0"
                  FontWeight="Bold"
-                 FontSize="13"/>
+                 FontSize="13"
+                 Foreground="Black"/>
 
         <!-- MODELO -->
         <TextBox x:Name="txtModelo"
@@ -60,7 +62,8 @@
                  Width="250"
                  HorizontalAlignment="Left"
                  Margin="20,45,0,0"
-                 FontSize="13"/>
+                 FontSize="13"
+                 Foreground="Black"/>
 
         <!-- MARCA -->
         <TextBox x:Name="txtMarca"
@@ -71,18 +74,22 @@
                  HorizontalAlignment="Left"
                  Margin="20,45,0,0"
                  FontWeight="Bold"
-                 FontSize="13"/>
+                 FontSize="13"
+                 Foreground="Black"/>
 
         <!-- TIPO -->
-        <TextBox x:Name="txtTipo"
-                 Grid.Row="3" Grid.Column="1"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                 mat:HintAssist.Hint="Tipo de artículo (*)"
-                 Width="250"
-                 HorizontalAlignment="Left"
-                 Margin="20,45,0,0"
-                 FontWeight="Bold"
-                 FontSize="13"/>
+        <ComboBox
+            x:Name="cmbTipoArticulo"
+            Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+            mat:HintAssist.Hint="Tipo*"
+            FontWeight="Bold"
+            Grid.Row="3"
+            Grid.Column="1"
+            HorizontalAlignment="Left"
+            Margin="20,45,0,0"
+            BorderBrush="Gray"
+            DisplayMemberPath="Nombre"
+            Foreground="Black"/>
 
         <!-- DESCRIPCIÓN -->
         <TextBox x:Name="txtDescripcion"
@@ -92,7 +99,8 @@
                  Width="550"
                  HorizontalAlignment="Left"
                  Margin="20,45,0,0"
-                 FontSize="13"/>
+                 FontSize="13"
+                 Foreground="Black"/>
 
         <!-- BOTONES -->
         <StackPanel Grid.Row="5" Grid.ColumnSpan="2"
@@ -101,14 +109,14 @@
                     Margin="0,30,0,0">
 
             <Button Content="CANCELAR"
-                    Click="BtnCancelar_Click"
+                    Click="btnCancelarModeloArticulo_Click"
                     Foreground="#dd243c"
                     Background="Transparent"
                     Width="120"
                     Margin="20,0"/>
 
             <Button Content="GUARDAR"
-                    Click="BtnGuardar_Click"
+                    Click="btnAnyadirModeloArticulo_Click"
                     Foreground="White"
                     Background="#dd243c"
                     Width="120"

@@ -128,3 +128,10 @@ C:\Users\alway\source\repos\estudioExamenEstudiar\estudioExamenEstudiar\bin\Debu
 C:\Users\alway\source\repos\estudioExamenEstudiar\estudioExamenEstudiar\bin\Debug\net10.0-windows\runtimes\win-x64\native\k5sprt64.dll
 C:\Users\alway\source\repos\estudioExamenEstudiar\estudioExamenEstudiar\bin\Debug\net10.0-windows\runtimes\win-x64\native\krb5_64.dll
 C:\Users\alway\source\repos\estudioExamenEstudiar\estudioExamenEstudiar\bin\Debug\net10.0-windows\runtimes\win-x64\native\krbcc64.dll
+C:\Users\alway\source\repos\estudioExamenEstudiar\estudioExamenEstudiar\obj\Debug\net10.0-windows\Frontend\Dialogos\GestionModeloArticulo.g.cs
+C:\Users\alway\source\repos\estudioExamenEstudiar\estudioExamenEstudiar\obj\Debug\net10.0-windows\Frontend\Dialogos\GestionModeloArticulo.baml
+C:\Users\alway\source\repos\estudioExamenEstudiar\estudioExamenEstudiar\obj\Debug\net10.0-windows\estudioExamenEstudiar.sourcelink.json
+C:\Users\alway\source\repos\estudioExamenEstudiar\estudioExamenEstudiar\obj\Debug\net10.0-windows\Frontend\UserControls\NuevoArticuloUserControl.g.cs
+C:\Users\alway\source\repos\estudioExamenEstudiar\estudioExamenEstudiar\obj\Debug\net10.0-windows\Frontend\UserControls\NuevoArticuloUserControl.baml
+C:\Users\alway\source\repos\estudioExamenEstudiar\estudioExamenEstudiar\obj\Debug\net10.0-windows\Frontend\UserControls\NuevoModeloArticuloUserControl.g.cs
+C:\Users\alway\source\repos\estudioExamenEstudiar\estudioExamenEstudiar\obj\Debug\net10.0-windows\Frontend\UserControls\NuevoModeloArticuloUserControl.baml

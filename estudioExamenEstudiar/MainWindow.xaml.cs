@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using estudioExamenEstudiar.Frontend.UserControls;
 using MahApps.Metro.Controls;
 
 namespace estudioExamenEstudiar
@@ -25,6 +26,33 @@ namespace estudioExamenEstudiar
         private void BtnSalir_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void RouteButton(object sender, SelectionChangedEventArgs e)
+        {
+            // 1. Determinar cuál ListView generó el evento
+            var listView = sender as ListView;
+            if (listView?.SelectedItem is not ListViewItem selectedItem)
+                return;
+
+            // 2. Obtenemos el texto del elemento pulsado
+            string selected = selectedItem.Content.ToString();
+
+            // 3. Limpiamos el panel donde cargamos pantallas
+            MainContent.Children.Clear();
+
+            // 4. Declaramos el control que vamos a cargar
+            UserControl? control = selected switch
+            {
+                "Articulo" => new NuevoArticuloUserControl(),
+                "Modelo Articulo" => new NuevoModeloArticuloUserControl(),
+                // Aqui los nuevos userControl
+                _ => null
+            };
+
+            // 5. Insertamos el nuevo control
+            if (control != null)
+                MainContent.Children.Add(control);
         }
     }
 }

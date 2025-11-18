@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace estudioExamenEstudiar.Backend.Servicios
 {
-    public interface ITipoArticuloRespository : IGenericRepository<Tipoarticulo>
+    public interface ITipoArticuloRepository : IGenericRepository<Tipoarticulo>
     {
+
     }
 }
